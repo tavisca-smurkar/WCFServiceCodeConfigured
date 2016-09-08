@@ -12,8 +12,11 @@ namespace EmployeeServiceHost
         {
             using (ServiceHost host = new ServiceHost(typeof(EmployeeService)))
             {
-                ServiceMetadataBehavior serviceBehaviour = new ServiceMetadataBehavior();
-                serviceBehaviour.HttpsGetEnabled = true;
+                ServiceMetadataBehavior serviceBehaviour = new ServiceMetadataBehavior
+                {
+                    HttpGetEnabled = true
+                };
+               
                 host.Description.Behaviors.Add(serviceBehaviour);
                 host.AddServiceEndpoint(typeof(IEmployeeService), new BasicHttpBinding(), "EmployeeService");
                 host.Open();
